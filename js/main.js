@@ -10,7 +10,7 @@ const width = Math.min(window.innerWidth, window.innerHeight);
 const height = Math.min(window.innerWidth, window.innerHeight) / 1.6;
 
 let angle = 0;
-let length = 3;
+let length = 5;
 let wave = [];
 let scale = width / 10;
 
@@ -38,17 +38,23 @@ function draw() {
     let r = (scale / 1.25) * (4 / (n * Math.PI));
     point.add(new Vector(r * Math.cos(n * angle), r * Math.sin(n * angle)));
 
+
+    //Draw Circles
+    ctx.globalAlpha=0.35
     ctx.beginPath();
     ctx.arc(prevPoint.x, prevPoint.y, r, 0, 2 * Math.PI);
     ctx.closePath();
     ctx.stroke();
+    ctx.globalAlpha=1
 
+    //Draw Lines
     ctx.beginPath();
     ctx.moveTo(prevPoint.x, prevPoint.y);
     ctx.lineTo(point.x, point.y);
     ctx.closePath();
     ctx.stroke();
 
+    //Draw joints
     ctx.beginPath();
     ctx.arc(point.x, point.y, 5, 0, 2 * Math.PI);
     ctx.closePath();
@@ -56,12 +62,14 @@ function draw() {
   }
   wave.unshift(point.y);
 
+  //Draw pencil
   ctx.beginPath();
   ctx.moveTo(point.x, point.y);
   ctx.lineTo(width / 5, point.y);
   ctx.stroke();
   ctx.closePath();
 
+  //Draw function
   ctx.translate(width / 5, 0);
   for (let i = 0; i < wave.length - 1; i++) {
     ctx.beginPath();
@@ -78,8 +86,8 @@ function update() {
 }
 
 function reset() {
-  length = 9;
-  lengthRange.value = 9;
+  length = 5;
+  lengthRange.value = 5;
   wave = [];
 }
 
