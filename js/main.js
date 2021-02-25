@@ -38,14 +38,13 @@ function draw() {
     let r = (scale / 1.25) * (4 / (n * Math.PI));
     point.add(new Vector(r * Math.cos(n * angle), r * Math.sin(n * angle)));
 
-
     //Draw Circles
-    ctx.globalAlpha=0.35
+    ctx.globalAlpha = 0.25;
     ctx.beginPath();
     ctx.arc(prevPoint.x, prevPoint.y, r, 0, 2 * Math.PI);
     ctx.closePath();
     ctx.stroke();
-    ctx.globalAlpha=1
+    ctx.globalAlpha = 1;
 
     //Draw Lines
     ctx.beginPath();
@@ -87,6 +86,7 @@ function update() {
 
 function reset() {
   length = 5;
+  angle = 0;
   lengthRange.value = 5;
   wave = [];
 }
