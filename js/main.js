@@ -6,8 +6,8 @@ const canvas = document.getElementById("canvas");
 const optionsDiv = document.getElementById("optionsDiv");
 const lengthRange = document.getElementById("rangeInput");
 const resetButton = document.getElementById("resetButton");
-const width = Math.min(window.innerWidth, window.innerHeight);
-const height = Math.min(window.innerWidth, window.innerHeight) / 1.6;
+const width = Math.min(window.innerWidth, window.innerHeight) / 1.1;
+const height = Math.min(window.innerWidth, window.innerHeight) / 1.76;
 
 let angle = 0;
 let length = 5;
@@ -55,7 +55,7 @@ function draw() {
 
     //Draw joints
     ctx.beginPath();
-    ctx.arc(point.x, point.y, 5, 0, 2 * Math.PI);
+    ctx.arc(point.x, point.y, scale / 25, 0, 2 * Math.PI);
     ctx.closePath();
     ctx.fill();
   }
@@ -65,10 +65,16 @@ function draw() {
   ctx.beginPath();
   ctx.moveTo(point.x, point.y);
   ctx.lineTo(width / 5, point.y);
-  ctx.stroke();
   ctx.closePath();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(width / 5, point.y);
+  ctx.lineTo(width / 5 - scale / 13, point.y + scale / 13);
+  ctx.lineTo(width / 5 - scale / 13, point.y - scale / 13);
+  ctx.closePath();
+  ctx.fill();
 
-  //Draw function
+  //Draw wave
   ctx.translate(width / 5, 0);
   for (let i = 0; i < wave.length - 1; i++) {
     ctx.beginPath();
@@ -86,8 +92,8 @@ function update() {
 
 function reset() {
   length = 5;
-  angle = 0;
   lengthRange.value = 5;
+  angle = 0;
   wave = [];
 }
 
