@@ -86,8 +86,9 @@ function draw() {
 }
 
 function update() {
-  if (wave.length > width) wave.pop();
   angle -= 0.025;
+  if (wave.length > width)
+    wave.pop();
 }
 
 function reset() {
